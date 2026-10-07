@@ -202,6 +202,30 @@ docs/                Microsoft Store notes
 - [ ] Updater / auto-update channel
 - [ ] Deep AV / EDR product features (this is a cleaner PoC, not a full endpoint agent)
 
+### GitHub Actions enablement (required once)
+
+The initial push used a Personal Access Token **without** the `workflow` scope, so GitHub rejected writes under `.github/workflows/`.
+
+Workflow YAML is published at [`docs/github-workflows/`](docs/github-workflows/) and also kept locally under `.github/workflows/`.
+
+To activate CI + Release:
+
+1. Create/update a classic PAT with scopes **`repo`** and **`workflow`** (or use SSH / GitHub CLI auth with equivalent rights).
+2. From a clone that has the local `.github/workflows` files:
+
+```bash
+mkdir -p .github/workflows
+cp docs/github-workflows/ci.yml .github/workflows/
+cp docs/github-workflows/release.yml .github/workflows/
+git add .github/workflows
+git commit -m "ci: enable GitHub Actions workflows"
+git push origin main
+git tag -f v0.1.0
+git push -f origin v0.1.0   # only if you need to re-run the release after enabling workflows
+```
+
+Until that is done, the Release workflow will **not** attach installers to the `v0.1.0` GitHub Release.
+
 ## License
 
 MIT (PoC). Adjust before commercial use.
