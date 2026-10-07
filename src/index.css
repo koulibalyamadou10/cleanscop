@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-surface: 248 250 252;
+  --color-surface-elevated: 255 255 255;
+  --color-surface-muted: 241 245 249;
+  --color-ink: 15 23 42;
+  --color-ink-muted: 71 85 105;
+  --color-ink-subtle: 148 163 184;
+  --color-accent: 14 116 144;
+  --color-accent-soft: 207 250 254;
+  --color-danger: 185 28 28;
+  --color-success: 21 128 61;
+  --color-border: 226 232 240;
+}
+
+.dark {
+  --color-surface: 15 23 42;
+  --color-surface-elevated: 30 41 59;
+  --color-surface-muted: 51 65 85;
+  --color-ink: 241 245 249;
+  --color-ink-muted: 203 213 225;
+  --color-ink-subtle: 148 163 184;
+  --color-accent: 34 211 238;
+  --color-accent-soft: 8 51 68;
+  --color-danger: 248 113 113;
+  --color-success: 74 222 128;
+  --color-border: 51 65 85;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  background: rgb(var(--color-surface));
+  color: rgb(var(--color-ink));
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .panel {
+    @apply rounded-xl border border-border bg-surface-elevated shadow-panel;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-white dark:text-slate-950 hover:opacity-90;
+  }
+
+  .btn-secondary {
+    @apply btn border border-border bg-surface-muted text-ink hover:bg-surface;
+  }
+
+  .btn-danger {
+    @apply btn bg-danger text-white hover:opacity-90;
+  }
+
+  .label {
+    @apply text-xs font-medium uppercase tracking-wide text-ink-subtle;
+  }
+}
